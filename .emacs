@@ -32,10 +32,6 @@
 ;no backup file
 (setq backup-inhibited t)
 
-
-;no backup file
-(setq backup-inhibited t)
-
 (show-paren-mode t)
 
 (transient-mark-mode t)
