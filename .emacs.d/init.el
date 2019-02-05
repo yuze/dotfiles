@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -101,8 +108,14 @@
 (straight-use-package 'js2-mode)
 (straight-use-package 'company-tern)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-hook 'js2-mode-hook 'tern-mode) 
 (add-to-list 'company-backends 'company-tern)
+(add-hook 'js2-mode-hook 'tern-mode) 
+(add-hook 'js2-mode-hook
+          (lambda ()
+             (setq my-js-mode-indent-num 2)
+             (setq js2-basic-offset my-js-mode-indent-num)
+             (setq js-switch-indent-offset my-js-mode-indent-num)
+             ))
 
 ;;; flycheck
 (straight-use-package 'flycheck)
