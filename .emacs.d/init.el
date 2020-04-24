@@ -67,7 +67,7 @@
 (global-company-mode)
 (setq company-transformers '(company-sort-by-backend-importance))
 (setq company-idle-delay 0)
-(setq company-minimum-prefix-length 3)
+(setq company-minimum-prefix-length 2)
 (setq company-selection-wrap-around t)
 (setq completion-ignore-case t)
 (setq company-dabbrev-downcase nil)
@@ -116,6 +116,31 @@
              (setq js2-basic-offset my-js-mode-indent-num)
              (setq js-switch-indent-offset my-js-mode-indent-num)
              ))
+
+;; ruby
+(setq url-proxy-services '(
+			   ("no_proxy" . "127.0.0.1")
+                           ("http" . "112.124.9.128:44433")
+                           ;; ("https" . "")
+                           ))
+(setq ruby-insert-encoding-magic-comment nil)
+(setq rbenv-installation-dir "~/.rbenv")
+
+(straight-use-package 'ruby-mode)
+(straight-use-package 'rbenv)
+(straight-use-package 'robe)
+(add-to-list 'auto-mode-alist '("\\.rb\\'" . ruby-mode))
+;(add-hook 'ruby-mode-hook 'robe-mode)
+;(add-hook 'ruby-mode-hook 'rbenv-mode)
+(add-hook 'ruby-mode-hook
+          '(lambda ()
+             (company-mode t)
+             (robe-mode t)
+             (make-local-variable 'company-backends)
+             (add-to-list 'company-backends 'company-robe)))
+
+;(eval-after-load 'company
+;  '(push 'company-robe company-backends))
 
 ;;; flycheck
 (straight-use-package 'flycheck)
